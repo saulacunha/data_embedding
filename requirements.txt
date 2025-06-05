@@ -1,2 +1,6 @@
 streamlit
 openai
+qdrant-client
+pika
+sentence-transformers
+torch

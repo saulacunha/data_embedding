@@ -1,0 +1,53 @@
+version: '3.9'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+  ingest:
+    build: ./microservices/ingest_service
+    environment:
+      - RABBITMQ_HOST=${RABBITMQ_HOST}
+      - RABBITMQ_PORT=${RABBITMQ_PORT}
+      - INGEST_INTERVAL=${INGEST_INTERVAL}
+    depends_on:
+      - rabbitmq
+  embedding:
+    build: ./microservices/embedding_service
+    environment:
+      - RABBITMQ_HOST=${RABBITMQ_HOST}
+      - RABBITMQ_PORT=${RABBITMQ_PORT}
+      - QDRANT_HOST=${QDRANT_HOST}
+      - QDRANT_PORT=${QDRANT_PORT}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - EMBEDDING_INTERVAL=${EMBEDDING_INTERVAL}
+    depends_on:
+      - rabbitmq
+      - qdrant
+  storage:
+    build: ./microservices/storage_service
+    environment:
+      - RABBITMQ_HOST=${RABBITMQ_HOST}
+      - RABBITMQ_PORT=${RABBITMQ_PORT}
+      - QDRANT_HOST=${QDRANT_HOST}
+      - QDRANT_PORT=${QDRANT_PORT}
+      - QDRANT_API_KEY=${QDRANT_API_KEY}
+      - STORAGE_INTERVAL=${STORAGE_INTERVAL}
+    depends_on:
+      - rabbitmq
+      - qdrant
+  query:
+    build: ./microservices/query_service
+    ports:
+      - "8000:8000"
+    environment:
+      - QDRANT_HOST=${QDRANT_HOST}
+      - QDRANT_PORT=${QDRANT_PORT}
+      - QUERY_INTERVAL=${QUERY_INTERVAL}
+    depends_on:
+      - qdrant
