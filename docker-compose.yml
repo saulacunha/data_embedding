@@ -25,6 +25,7 @@ services:
       - QDRANT_HOST=${QDRANT_HOST}
       - QDRANT_PORT=${QDRANT_PORT}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - EMBEDDING_API_URL=${EMBEDDING_API_URL}
       - EMBEDDING_INTERVAL=${EMBEDDING_INTERVAL}
     depends_on:
       - rabbitmq

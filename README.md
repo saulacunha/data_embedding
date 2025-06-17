@@ -11,6 +11,7 @@ This project provides a set of microservices for ingesting text, generating embe
 
 ## Quick start
 1. Copy `.env.example` to `.env` and adjust credentials.
+   Set `EMBEDDING_API_URL` when using an external embedding provider.
 2. Build and start the stack:
 
 ```bash
