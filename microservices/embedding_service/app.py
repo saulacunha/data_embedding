@@ -2,11 +2,12 @@ import os
 import time
 
 INTERVAL = int(os.getenv('EMBEDDING_INTERVAL', '60'))
+CHUNK_STRATEGY = os.getenv('CHUNK_STRATEGY', 'full')
 
 
 def main():
     while True:
-        print('Embedding service running...')
+        print(f"Embedding service running with chunk strategy: {CHUNK_STRATEGY}...")
         time.sleep(INTERVAL)
 
 

@@ -26,6 +26,7 @@ services:
       - QDRANT_PORT=${QDRANT_PORT}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - EMBEDDING_INTERVAL=${EMBEDDING_INTERVAL}
+      - CHUNK_STRATEGY=${CHUNK_STRATEGY}
     depends_on:
       - rabbitmq
       - qdrant
