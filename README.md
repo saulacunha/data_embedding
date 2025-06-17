@@ -20,5 +20,25 @@ make up
 
 Visit the RabbitMQ management UI at `http://localhost:15672` and Qdrant at `http://localhost:6333`.
 
+## Configuración YAML
+El archivo `docker-compose.yml` describe cómo se orquestan los microservicios y las variables de entorno que utilizan. Cada sección puede personalizarse para apuntar a diferentes orígenes de datos o colecciones de Qdrant.
+
+Ejemplo de fragmento:
+
+```yaml
+embedding:
+  build: ./microservices/embedding_service
+  environment:
+    - RABBITMQ_HOST=${RABBITMQ_HOST}
+    - QDRANT_HOST=${QDRANT_HOST}
+    - OPENAI_API_KEY=${OPENAI_API_KEY}
+```
+
+Tras editar `.env` y el YAML, la pila completa puede iniciarse con:
+
+```bash
+docker compose up -d
+```
+
 ## Development
 Each service has a simple `app.py` that polls for work. Polling intervals and connection settings are taken from environment variables defined in `.env`.
