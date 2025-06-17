@@ -1,0 +1,20 @@
+input:
+  type: local
+  path: /path/to/data
+  credentials: null
+output:
+  type: qdrant
+  destination: http://localhost:6333
+  credentials: null
+format_in: txt
+format_out: json
+processing:
+  model: ada
+  provider: local
+  api_url: null
+  distance: cosine
+  dimension: 1536
+  chunking:
+    strategy: sentence
+    size: 500
+  interval: 60

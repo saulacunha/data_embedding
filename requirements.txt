@@ -4,3 +4,4 @@ qdrant-client
 pika
 sentence-transformers
 torch
+PyYAML
