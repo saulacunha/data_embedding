@@ -27,7 +27,7 @@ class DataVectorizer:
             if not self.api_key:
                 raise ValueError("API key is required for OpenAI.")
 
-            self.client = self.client = openai.Client(api_key=self.api_key)
+            self.client = openai.Client(api_key=self.api_key)
             self.model_name = 'text-embedding-ada-002'
             self.device = None
         else:
